@@ -1,0 +1,54 @@
+\documentclass{kththesis}
+
+% Load preamble
+\input{preamble}
+
+
+\newcommand{\change}[1]{{\color{red} {\bf LB:} #1}}
+
+% Define the title page
+\title{Synthetic Meta-Learning}
+\subtitle{Learning to learn real-world tasks with synthetic data}
+\alttitle{Syntetisk Metainlärning}
+\author{Lukas Lundmark}
+\email{llundma@kth.se}
+\supervisor{Joel Brynielsson}
+\supervisor{Linus Luotsinen}
+\examiner{Olle Bälter}
+\programme{Master in Machine Learning}
+\school{School of Electrical Engineering and Computer Science}
+\date{\today}
+
+\begin{document}
+
+% Frontmatter includes the titlepage, abstracts and table-of-contents
+\fancyhead{}
+\frontmatter
+\titlepage
+
+\input{Abstract} % Abstract
+
+% Display form and such
+\printglossary[type=\acronymtype,style=long]
+\tableofcontents
+\mainmatter
+
+\fancyhead[R]{\sffamily\small\leftmark\qquad}
+\cfoot{$\thepage$}
+
+% Document body
+\input{Introduction}
+\input{Theory}
+\input{Methodology}
+\input{Result}
+\input{Discussion}
+\input{Conlusions}
+
+% Bibliography
+\printbibliography[heading=bibintoc]
+
+% Appendix
+\appendix
+\input{Appendix}
+
+\end{document}

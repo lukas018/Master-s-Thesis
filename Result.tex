@@ -1,0 +1,271 @@
+\chapter{Result}
+This chapter presents the results of the experiments outlined in the previous chapter. It will begin by showing the randomization configurations used for each generated dataset. It will then display the accuracy and standard deviation of each of the models trained with one of the datasets, as well as the baselines. Lastly, the meta-training accuracy of the different datasets will be presented.
+
+\section{Datasets}
+Table \ref{rand-table} outlines which of the possible randomization options that were enabled or disabled for each of the generated datasets. A full explanation of all settings can be found in Section \ref{dataset-summary}.
+
+
+\begin{table}[h]
+\caption{Randomization configurations for synthetic datasets}
+\label{rand-table}
+\resizebox{\textwidth}{!}{%Fas
+  \begin{tabular}{cccccc}
+  \hline
+    \textbf{Dataset}  & Crepuscular Rays & Weather & Time  & Context & Texture\\
+    \hline
+    D1      & \checkmark     & \checkmark     & \checkmark  & \checkmark &  \xmark \\
+    D2      & \xmark         & \xmark         & \xmark      & \checkmark &  \xmark \\
+    D3      & \xmark         & \checkmark     & \checkmark  & \checkmark &  \xmark \\
+    D4      & \checkmark     & \xmark         & \checkmark  & \checkmark &  \xmark \\
+    D5      & \checkmark     & \checkmark     & \xmark      & \checkmark &  \xmark \\
+    D6      & \checkmark     & \checkmark     & \checkmark  & \checkmark &  \checkmark \\
+    D7      & \checkmark     & \checkmark     & \checkmark  &  \xmark & \xmark \\
+    \hline
+  \end{tabular}}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{Test-accuracy in \% for each dataset on \textbf{5-way 1-shot} classification over 5000 test-tasks}
+\label{accfiveone}
+\begin{tabular}{l *{3}{S}}
+        \hline
+        Dataset & \text{Mean (\%)} & \text{Std. (\%)} & \text{CI $\pm95\%$}
+        \\
+        \hline
+        BL1  & 31.9468321028136 & 8.0587001344171652 &  \pm 0.2233757712937365
+        \\
+        BL2  & 62.9369854927063 & 12.306884676218033 & \pm  0.3411294426769018
+        \\
+        D1  & 46.405258774757385 & 10.25920882821083 & \pm  0.2843707799911499
+        \\
+        D2  & 37.87154257297516 & 9.331290423870087 & \pm  0.2843707799911499        
+        \\
+        D3  & 36.92753314971924 & 9.154894948005676 & \pm  0.25376074481755495
+        \\
+        D4  & 41.715073585510254 & 9.66532900929451 & \pm  0.2679092576727271
+        \\
+        D5  & 46.327099204063416 & 10.632327944040298 & \pm  0.29471309389919043
+        \\        
+        D6  & 43.797504901885986 & 9.575874358415604 & \pm  0.26542970445007086
+        \\
+        D7  & 44.011953473091125 & 10.048750042915344 & \pm  0.2785371383652091
+        \\ \hline   
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Test-accuracy in \% for each dataset on \textbf{5-way 5-shot} classification over five-thousand test-tasks}
+\label{accfivefive}
+\begin{tabular}{l *{3}{S}}
+    \hline
+    Dataset & \text{Mean (\%)} & \text{Std. (\%)}  & \text{CI $\pm95\%$}
+    \\\hline
+    BL1  & 49.92594717554718 &     9.111414172566245 &     \pm 0.2525561371756853
+    \\
+    BL2  & 72.88147211074829 &   10.564619302749634 &     \pm 0.2928362926468253
+    \\
+    D1 & 67.83030033111572 &    9.793011099100113 &     \pm 0.2714484231546521
+    \\
+    D2   & 59.50989127159119 &    9.523329138755798 &    \pm 0.2639732090756297
+    \\
+    D3   & 62.06099987030029 &    9.490425884723663 &    \pm 0.26306118816137314
+    \\
+    D4   & 65.76035618782043 &    9.420520067214966 &    \pm 0.26112350169569254
+    \\
+    D5   & 69.03369426727295 &    9.92111787199974 &     \pm 0.27499934658408165
+    \\
+    D6   & 67.11101531982422 &    10.139784216880798 &    \pm 0.28106047903736975
+    \\
+    D7   & 66.7371392250061 &     9.804338216781616 &    \pm 0.27176239527761936
+    \\\hline   
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{Test-accuracy in \% for each dataset on \textbf{5-way 10-shot} classification (FOMAML) over 5000 test-tasks}
+\label{accfiveten}
+\begin{tabular}{l *{3}{S}}
+        \hline
+        Dataset & \text{Mean (\%)} & \text{Std. (\%)} & \text{CI $\pm95\%$}
+        \\
+        \hline
+        BL1  & 0 & 0 &  \pm 0
+        \\
+        BL2  & 73.70424270629
+        883 & 9.837372601032257 & \pm  0.27267804834991693
+        \\
+        D1  & 72.91644811630249 & 9.295393526554108 & \pm  0.25765516329556704
+        \\
+        D2  & 63.08090090751648 & 8.833577483892441 & \pm  0.24485429748892784        
+        \\
+        D3  & 66.285240650177 & 9.517403692007065 & \pm  0.26380897033959627
+        \\
+        D4  & 66.4787232875824 & 9.069159626960754 & \pm  0.25138428900390863
+        \\
+        D5  & 71.78317904472351 & 9.001167118549347 & \pm  0.249499618075788
+        \\        
+        D6  & 70.07576823234558 & 9.73370373249054 & \pm  0.2698044991120696
+        \\
+        D7  & 70.94521522521973 & 9.480410814285278 & \pm  0.26278358418494463
+        \\ \hline   
+    \end{tabular}
+\end{table}
+
+\section{Test Accuracy}
+Tables \ref{accfiveone} and \ref{accfivefive} show the average accuracy of five-thousand randomly sampled test-tasks for each of the datasets for the two classification scenarios. Each model for each dataset was meta-trained using 30,000 meta-batches. \ref{accfiveten} shows the average accuracy of a similar classification task but with more samples and trained using the first-order approximation of \gls{MAML}: \gls{FOMAML}. 
+
+Figures \ref{fig:accgraphfivefive} and \ref{fig:accgraphfiveone} show the average validation accuracy at each of the ten gradient steps the models take during the meta-test phase.
+
+
+\newcommand{\testgraph}[1]{
+\begin{tikzpicture}
+    \begin{axis}[
+            title={Average Accuracy},
+            ylabel={Accuracy},
+            ylabel style = {font=\small},
+            xlabel={Steps},
+            xlabel style = {font=\small},
+            xmin=0, xmax=10,
+            ymin=0, ymax=1,
+            ymajorgrids=true,
+            legend pos=outer north east,
+            grid style=dashed,
+               cycle list name=black white,
+            smooth
+        ]
+
+        \addplot  table[x expr=\coordindex,y=mean] {results/from-scratch/#1.dat};
+        \addplot  table[x expr=\coordindex,y=mean] {results/baseline/#1.dat};
+        \addplot  table[x expr=\coordindex,y=mean] {results/full-light/#1.dat};
+        \addplot  table[x expr=\coordindex,y=mean] {results/static-light/#1.dat};
+        \addplot  table[x expr=\coordindex,y=mean] {results/no-rays/#1.dat};
+        \addplot  table[x expr=\coordindex,y=mean] {results/no-weather/#1.dat};
+        \addplot  table[x expr=\coordindex,y=mean] {results/no-time/#1.dat};
+        \addplot  table[x expr=\coordindex,y=mean] {results/textures/#1.dat};              
+        \addplot  table[x expr=\coordindex,y=mean] {results/no-context/#1.dat};              
+        
+ \legend{BL1, BL2, D1, D2, D3, D4, D5, D6, D7}
+\end{axis}        
+\end{tikzpicture}
+}
+
+\begin{figure}
+\testgraph{5-5}
+\caption{5-way 5-shot accuracy during meta-training}
+\label{fig:accgraphfivefive}
+\end{figure}
+
+\begin{figure}
+\testgraph{5-1}
+\caption{5-way 5-shot accuracy during meta-training}
+\label{fig:accgraphfiveone}
+\end{figure}
+
+\newcommand{\subgraphbody}[2][0]{
+                    %bolita
+
+
+                    %\ifnum#1=1 \addlegendentry{Real Data} \fi
+                    %\addplot [very thick, green, each nth point={10}] file {#2/baseline.dat};
+
+                    \ifnum#1=1 \addlegendentry{D1} \fi
+                    \addplot [very thick, green, each nth point={10}] file {#2/vehicles-base.dat};
+                    
+                    \ifnum#1=1 \addlegendentry{D2} \fi
+                    \addplot [dashed,very thick, blue, each nth point={10}] file {#2/vehicles-static-light.dat};                    
+                    
+                                        \ifnum#1=1 \addlegendentry{D3} \fi
+                    \addplot [red, dashed, each nth point={10}] file {#2/vehicles-no-rays.dat};             
+                    \ifnum#1=1 \addlegendentry{D4} \fi
+                    \addplot [dashed, very thick, green, each nth point={10}] file {#2/vehicles-no-weather.dat};
+                    
+                    
+                    \ifnum#1=1 \addlegendentry{D5} \fi
+                    \addplot [very thick, yellow, each nth point={10}] file {#2/vehicles-no-time.dat};
+                    
+                    \ifnum#1=1 \addlegendentry{D6} \fi
+                    \addplot [very thick, blue, each nth point={10}] file {#2/vehicles-color.dat};                    
+                    \ifnum#1=1 \addlegendentry{D7} \fi
+                    \addplot [very thick, red, each nth point={10}] file {#2/vehicles-no-context.dat};
+                    
+                    
+                  
+                   
+}
+
+
+\newcommand{\newplotgroup}[2]{
+      \begin{tikzpicture}
+            \begin{groupplot}[
+                group style={
+                    group name=my plots,
+                    group size=2 by 3,
+                    %xlabels at=edge bottom,
+                    ylabels at=edge left,
+                    horizontal sep=1.5cm,
+                    vertical sep=2cm,
+                    },
+                    xlabel=meta-iteration,
+                    ylabel=accuracy,
+                    every x tick scale label/.style={at={(rel axis cs:1,0)},anchor=south west,inner sep=1pt},
+                    width=0.5\textwidth,
+                    height=0.45\textwidth,
+                    xmin=0, 
+                    xmax=29950,
+                    ymax=1,
+                    ymin=0
+            ]
+                \nextgroupplot[legend to name=#2-legend]
+                    \subgraphbody{#1/metatrain_Post-update_accuracy__step_1}
+                
+                %\nextgroupplot[group/empty plot]
+                
+                \nextgroupplot
+                    \subgraphbody{#1/metatrain_Post-update_accuracy__step_2/}
+                    
+                \nextgroupplot
+                    \subgraphbody{#1/metatrain_Post-update_accuracy__step_3/}
+                    
+                \nextgroupplot
+                    \subgraphbody{#1//metatrain_Post-update_accuracy__step_4/}
+                
+                \nextgroupplot
+                    %bolita
+                    \subgraphbody[1]{#1/metatrain_Post-update_accuracy__step_5/}
+                
+            \end{groupplot}
+             \node[text width=5cm,align=center,anchor=north] at ([yshift=10mm]my plots c1r1.north) {\captionof{subfigure}{Update step 1\label{subplot:#2one}}};
+            \node[text width=5cm,align=center,anchor=north] at ([yshift=10mm]my plots c2r1.north) {\captionof{subfigure}{Update step 2 \label{subplot:#2two}}};
+            \node[text width=5cm,align=center,anchor=north] at ([yshift=10mm]my plots c1r2.north) {\captionof{subfigure}{Update step 3 \label{subplot:#2three}}};
+            \node[text width=5cm,align=center,anchor=north] at ([yshift=10mm]my plots c2r2.north) {\captionof{subfigure}{Update step 4\label{subplot:#2four}}};
+            \node[text width=5cm,align=center,anchor=north] at ([yshift=10mm]my plots c1r3.north) {\captionof{subfigure}{Update step 5\label{subplot:#2five}}};
+            %node[align=center,anchor=center] at ([xshift=5cm, yshift=0mm]my plots c1r3.east) {\pgfplotslegendfromname{#2-legend}};
+        \end{tikzpicture}
+}
+
+\section{Training Accuracy}
+
+\begin{figure}[h]
+    \caption{Smoothed  training accuracy during meta-training for \textbf{5-way 5-shot} task, over 30,000 training iterations. The five plots show have the accuracy on the validation data after one to five gradient steps on the training data for the sampled training tasks.}
+    %\newplotgroup{plots/5-5}{fivefive}
+\end{figure}
+
+\begin{figure}[h]
+    \caption{Smoothed training accuracy during meta-training for \textbf{5-way 1-shot} task, over 30,000 training iterations. The five plots show have the accuracy on the validation data after one to five gradient steps on the training data for the sampled training tasks.}
+    %\newplotgroup{plots/5-1}{fiveone}
+\end{figure}
+
+Figures \ref{subplot:fivefiveone}--\ref{subplot:fivefivefive} display the smoothed training accuracy throughout the meta-training for a subset of trained 5-way 5-shot classifiers. The training accuracy is the average accuracy the network achieves after one to five update steps when adapting to all tasks in a randomly sampled meta-batch. Similarly, \ref{subplot:fiveoneone}--\ref{subplot:fiveonefive} shows the training for the 5-way 1-shot classifiers. These plots can be interesting to analyze since different datasets can have different effects on the meta-learning process. They can also be used show how easy or difficult the tasks sampled from each of the different datasets are to learn.
+
+The five figures \ref{subplot:fivefiveone}--\ref{subplot:fivefivefive}, as well as \ref{subplot:fiveoneone}--\ref{subplot:fiveonefive} show the accuracy during all 30,000 meta-training iterations, and each plot shows the average accuracy after a fixed set of gradient steps. For example, Figure \ref{subplot:fivefiveone} shows how the accuracy after a single gradient update-step on a random set of tasks, while Figure \ref{subplot:fivefivefive} shows the accuracy for the models after five gradient update steps on a random set of tasks.
+
+The accuracy-values in the figures have been smoothed significantly. The smoothing was necessary since the accuracy values are noisy and heavily dependant on the difficulty of the sampled task, which makes it difficult to plot. The smoothing was done using an exponential moving average:
+
+$$\hat{y}_{t+1} = \alpha\hat{y}_t + (1-\alpha)y_{t+1}$$ 
+
+with $\alpha=0.97$.

@@ -1,0 +1,67 @@
+\chapter{Introduction}
+\section{Background}
+Machine learning and deep learning have developed at a rapid pace. State-of-the-art machine learning models can now outperform humans in a variety of tasks, both in terms of accuracy and efficiency. However, even state-of-the-art machine learning models are still limited when it comes to one of the hallmarks of human intelligence; generalizing from limited information. A human child can, for example, learn to recognize an unknown animal species from only seeing a handful of images. A state-of-the-art deep learning image classifier can require hundreds of labeled example images to perform the same task.
+
+Meta-learning is an approach to machine learning that aims to address this shortcoming and have models learn how to generalize from a limited number of examples. The field and its central ideas date back several decades but have in recent years had promising developments like \gls{MAML}~\cite{maml} which have enabled meta-learning to be used on a broader range of tasks. 
+
+Broadly outlined, meta-learning involves training machine learning models in two phases: First, an initial \textit{meta-learning phase} where the model gradually acquires knowledge from various tasks $T_1, ..., T_N$. Secondly, a \textit{meta-testing phase} where the previously trained model is tasked with quickly adapting to previously unseen tasks $T_{N+1}$ with only a couple of examples~\cite{reptile}.
+
+\section{\change{Scientific Gap}}
+The end-goal of meta-learning is to leverage the benefits of deep learning without the use of large training sets. However, meta-learning requires large labeled datasets during the initial meta-learning phase from which it can sample training tasks. This limits what problem domains meta-learning can be used in.
+
+The idea of this thesis is to utilize an automatically generated, synthetic datasets during the meta-learning phase, and then have the trained model adapt to unseen test tasks consisting of real-world data. An approach we call Synthetic Meta-Learning.
+
+Previous results from \textcite{domainrandcars}, ~\textcite{structureddomainrandomization} and~\textcite{domainrand} have shown that synthetic data can be used to complement and even completely replace real-world data for a variety of tasks.
+
+The goal of this thesis is to explore to what degree synthetic data can be used during the meta-learning phase of \gls{MAML}, how well synthetically trained models can adapt to new tasks with unseen real-world data and how the synthetic data should be generated in order to maximize performance.
+
+\section{Problem Statement}
+
+\textit{Can meta-learning with synthetic image data rival the performance of meta-learning with real-world images, and how do different aspects of the synthetic image data, such as color, lighting, and object position, affect final performance?}
+
+
+\section{Scope}
+The scope of this thesis consists of implementing and evaluating an end-to-end meta-learning pipeline, training models using synthetic data and \gls{MAML}, and evaluating the model's ability to learn new tasks with real-world data (see Figure \ref{pipeline}). The synthetic data consists of single object images generated using the \gls{VBS3} military simulator, portraying a variety of military vehicles in a fixed number of settings. A fixed number of randomization methods for introducing variation into the image data are tested in order to determine how synthetic data is best generated. Performance is evaluated on a hand-labeled real-world dataset specifically gathered for this thesis, containing single object images of military vehicles. \change{removed} The network architecture and hyperparameter settings have been taken from previous related work in order to reduce the number of network configuration to be tested.
+
+\section{Novelty and Scientific Relevance}
+The need for large labeled datasets during meta-training is one of the method's main drawbacks. Several papers have been published that focus on methods to avoid using it, like unsupervised meta-learning~\cite{unsup-maml, unsup-maml-rand}. However, to the author's knowledge, there is no previous research that has aimed to use synthetic data to meta-train a model which is then adapted to real-world tasks, making the suggested approach a novel one.
+
+\begin{figure} [h]
+    \pgfmathsetseed{2}
+    \begin{tikzpicture}
+[
+inner sep=2mm, 
+minimum width=2.0cm, 
+minimum height=1.0cm, 
+node distance = 1.0cm,
+std1/.style={rectangle, rounded corners,fill=gray!20, draw=black, align=center},
+std2/.style={rectangle, rounded corners,fill=gray!20, draw=black, align=center},
+std3/.style={ellipse, rounded corners,fill=white, draw=black, align=center},
+]
+\node [std1] (simulator) {Simulated\\environment};
+\node [std1, right = of simulator] (synthetic) {Synthetic\\dataset (large)};
+\node [std3, right = of synthetic] (meta) {Meta-\\learning};
+
+\node [std1, above = of meta] (model1) {Untrained\\model};
+
+\node [std3, below = of meta] (fewshot) {Fine-\\tuning};
+\node [std2, left = of fewshot] (real) {Real-world\\task \\(few samples)};
+\node [std2, left = of real] (realworld) {Real-world\\environment};
+
+
+\node [std2, below = of fewshot] (model2) {Trained\\model};
+
+\draw [->,black,thick] (simulator) -- node[above, midway, yshift=0.5cm]{} (synthetic);
+\draw [->,black,thick] (synthetic) -- node[above, midway, yshift=0.5cm]{} (meta);
+\draw [->,black,thick] (realworld) -- node[below, midway, yshift=-0.5cm]{} (real);
+\draw [->,black,thick] (real) -- node[below, midway, yshift=-0.5cm]{} (fewshot);
+
+\draw [->,black,thick] (model1) -- node[right, midway]{} (meta);
+\draw [->,black,thick] (meta) -- node[right, midway]{} (fewshot);
+
+\draw [->,black,thick] (fewshot) -- node[right,midway]{} (model2);
+\end{tikzpicture}
+
+\caption{Synthetic meta-learning pipeline}    
+\label{pipeline}
+\end{figure}

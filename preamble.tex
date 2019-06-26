@@ -1,0 +1,109 @@
+\usepackage{blindtext} % This is just to get some nonsense text in this template, can be safely removed
+\usepackage{csquotes} % Recommended by biblatex
+\usepackage[linesnumbered,algoruled,boxed,lined]{algorithm2e}
+\usepackage{bm}
+\usepackage[urldate=long, maxbibnames=99]{biblatex}
+\usepackage[hidelinks]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[acronym, smallcaps]{glossaries}
+\usepackage[labelfont=bf]{caption}
+\usepackage{tikz}
+	\usetikzlibrary{positioning}
+	\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{catchfile}
+\usepackage{pgfplots}% Provides options for creating plots
+	\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.15}
+\usepackage{multirow}
+\usepackage{pifont}
+\usepackage{cleveref}
+\usepackage{siunitx}
+
+\sisetup{
+  round-mode          = places, % Rounds numbers
+  round-precision     = 2, % to 2 places
+}
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+
+\usetikzlibrary{shapes, arrows}
+\addbibresource{references.bib} % The file containing our references, in BibTeX format
+%\captionsetup[subfigure]{labelformat=empty} % Remove letters on subcaption figures
+
+\let\firstchar\lowercase
+\let\oldprintglossaries\printglossaries
+\def\printglossaries{\let\firstchar\uppercase\oldprintglossaries}
+
+\loadglsentries{acronyms}
+\makeglossaries
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.7em}
+
+\newcommand{\No}{\mathcal{N}}
+\newcommand{\bo}{\textbf}
+
+%----------- Mathematic commands----------------
+%------------------------------------
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{argmax}}\;} %
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{argmin}}\;} %
+\newcommand{\pos}[1]{Pr \left( #1\right)}
+\newcommand{\condpos}[2]{Pr \left( #1 \middle| #2 \right)}
+\newcommand{\jointpos}[2]{Pr \left( #1, #2 \right)}
+\newcommand{\innerprod}[2]{\langle #1 , #2 \rangle}
+\newcommand{\partder}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\partdertext}[2]{\partial#1/\partial#2}
+\newcommand{\fullder}[2]{\frac{d#1}{d#2}}
+\newcommand{\maxfunc}[1]{\underset{#1}{\operatorname{max}}\;}
+\newcommand{\gradient}[1]{\nabla#1}
+\newcommand{\gradientsub}[2]{\nabla_{#2}#1}
+
+
+\newcommand{\bacterium}[8]{
+    \pgfmathsetmacro{\circleWidth}{#3*2 + 2.4}
+    \pgfmathsetmacro{\circleCenterY}{#2 + 0.5*\circleWidth}
+    
+    \node[circle, below, minimum width= \circleWidth cm, minimum height= \circleWidth cm, label=#8:#5] (#5) at (#1, \circleCenterY) {};
+
+    
+    \pgfmathsetmacro{\randomizeA}{
+        #1 + (rand*#3)
+    }
+    
+    \pgfmathsetmacro{\randomizeB}{
+        #2 + (rand*#3)
+    }
+    
+    \pgfmathsetmacro{\randomizeImage}{
+        int(rand*7)+ 8
+    }
+    
+    \node[draw=black,very thick, inner sep=0pt] (\randomizeA) at (\randomizeA cm, \randomizeB cm) {
+         \includegraphics[height=15pt, width=15pt]{#4/#7}
+    };
+    
+    \node[rectangle, opacity=0.2, #6 inner sep=0pt, minimum width=15pt, minimum height=15pt] (#5_#7) at (\randomizeA cm, \randomizeB cm) {};
+}
+
+
+\newcommand{\randomCircle}[8]{
+    \foreach \x in {1,...,#4}{
+        \bacterium{#1}{#2}{#3}{#5}{#6}{#7}{\x}{#8}
+    }
+}
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, minimum height=2em]
